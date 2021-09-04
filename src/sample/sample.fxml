@@ -4,22 +4,11 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<GridPane alignment="BASELINE_CENTER" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
-   <columnConstraints>
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-      <RowConstraints />
-   </rowConstraints>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <MenuBar GridPane.columnSpan="3">
+      <MenuBar>
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
@@ -28,9 +17,9 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Draw">
             <items>
-              <MenuItem fx:id="_miFillBlack" mnemonicParsing="false" text="Fill Black" />
-                  <MenuItem fx:id="_miFillWhite" mnemonicParsing="false" text="Fill White" />
-                  <MenuItem fx:id="_miRandRects" mnemonicParsing="false" text="Прямоугольники" />
+				<MenuItem fx:id="_miFillBlack" mnemonicParsing="false" text="Fill Black" />
+				<MenuItem fx:id="_miFillWhite" mnemonicParsing="false" text="Fill White" />
+				<MenuItem fx:id="_miRandRects" mnemonicParsing="false" text="Прямоугольники" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -40,6 +29,6 @@
           </Menu>
         </menus>
       </MenuBar>
-      <ImageView fx:id="_imageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <ImageView fx:id="_imageView" pickOnBounds="true" preserveRatio="true" />
    </children>
-</GridPane>
+</VBox>

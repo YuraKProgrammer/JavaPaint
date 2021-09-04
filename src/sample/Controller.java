@@ -39,9 +39,10 @@ public class Controller {
 
     public void setScene(Scene scene) {
         this.scene = scene;
-        _image = createImage(800, 600, Color.BLUE);
-        var image = SwingFXUtils.toFXImage(_image, null);
-        _imageView.setImage(image);
+        scene.widthProperty().addListener((obs, oldVal, newVal) -> resize());
+        scene.heightProperty().addListener((obs, oldVal, newVal) -> resize());
+        resize();
+
         _miFillBlack.setOnAction(actionEvent -> {
             var drawer = new Filler();
             drawer.setColor(Color.BLACK);
@@ -56,6 +57,11 @@ public class Controller {
             var drawer = new RandomRectangels(new SmallChangesRandomColors());
             drawImage(drawer);
         });
+    }
+
+    private void resize() {
+        _image = createImage((int) scene.getWidth(), (int) scene.getHeight(), Color.black);
+        _imageView.setImage(SwingFXUtils.toFXImage(_image, null));
     }
 
     private void drawImage(IDrawer drawer) {
