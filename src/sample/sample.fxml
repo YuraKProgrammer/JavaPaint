@@ -30,6 +30,7 @@
             <items>
               <MenuItem fx:id="_miFillBlack" mnemonicParsing="false" text="Fill Black" />
                   <MenuItem fx:id="_miFillWhite" mnemonicParsing="false" text="Fill White" />
+                  <MenuItem fx:id="_miRandRects" mnemonicParsing="false" text="Прямоугольники" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

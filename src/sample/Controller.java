@@ -2,6 +2,9 @@ package sample;
 
 import drawers.Filler;
 import drawers.IDrawer;
+import drawers.RandomRectangels;
+import generators.RandomColors;
+import generators.SmallChangesRandomColors;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -18,6 +21,8 @@ public class Controller {
     private MenuItem _miFillBlack;
     @FXML
     private MenuItem _miFillWhite;
+    @FXML
+    private MenuItem _miRandRects;
 
     private BufferedImage _image;
 
@@ -34,7 +39,7 @@ public class Controller {
 
     public void setScene(Scene scene) {
         this.scene = scene;
-        _image = createImage(200, 100, Color.BLUE);
+        _image = createImage(800, 600, Color.BLUE);
         var image = SwingFXUtils.toFXImage(_image, null);
         _imageView.setImage(image);
         _miFillBlack.setOnAction(actionEvent -> {
@@ -45,6 +50,10 @@ public class Controller {
         _miFillWhite.setOnAction(actionEvent -> {
             var drawer = new Filler();
             drawer.setColor(Color.WHITE);
+            drawImage(drawer);
+        });
+        _miRandRects.setOnAction(actionEvent -> {
+            var drawer = new RandomRectangels(new SmallChangesRandomColors());
             drawImage(drawer);
         });
     }

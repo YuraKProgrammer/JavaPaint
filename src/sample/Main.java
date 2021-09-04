@@ -16,7 +16,7 @@ public class Main extends Application {
         var loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("sample.fxml")));
         var root = (Parent)loader.load();
         primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root, 600, 550));
         primaryStage.show();
         var controller = loader.<Controller>getController();
         controller.setScene(primaryStage.getScene());
