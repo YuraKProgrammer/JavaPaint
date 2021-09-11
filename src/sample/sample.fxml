@@ -17,9 +17,11 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Draw">
             <items>
-				<MenuItem fx:id="_miFillBlack" mnemonicParsing="false" text="Fill Black" />
-				<MenuItem fx:id="_miFillWhite" mnemonicParsing="false" text="Fill White" />
+				<MenuItem fx:id="_miFillBlack" mnemonicParsing="false" text="Заполнить чёрным" />
+				<MenuItem fx:id="_miFillWhite" mnemonicParsing="false" text="Заполнить белым" />
 				<MenuItem fx:id="_miRandRects" mnemonicParsing="false" text="Прямоугольники" />
+                  <MenuItem fx:id="_miRandLines" mnemonicParsing="false" text="Линии" />
+                  <MenuItem fx:id="_miSin" mnemonicParsing="false" text="Синусоида" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

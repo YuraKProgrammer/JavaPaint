@@ -1,8 +1,7 @@
 package sample;
 
-import drawers.Filler;
-import drawers.IDrawer;
-import drawers.RandomRectangels;
+import drawers.*;
+import generators.IColorGenerator;
 import generators.RandomColors;
 import generators.SmallChangesRandomColors;
 import javafx.embed.swing.SwingFXUtils;
@@ -23,6 +22,10 @@ public class Controller {
     private MenuItem _miFillWhite;
     @FXML
     private MenuItem _miRandRects;
+    @FXML
+    private MenuItem _miRandLines;
+    @FXML
+    private MenuItem _miSin;
 
     private BufferedImage _image;
 
@@ -55,6 +58,14 @@ public class Controller {
         });
         _miRandRects.setOnAction(actionEvent -> {
             var drawer = new RandomRectangels(new SmallChangesRandomColors());
+            drawImage(drawer);
+        });
+        _miRandLines.setOnAction(actionEvent -> {
+            var drawer = new Rays(new RandomColors());
+            drawImage(drawer);
+        });
+        _miSin.setOnAction(actionEvent -> {
+            var drawer = new Sinus(new SmallChangesRandomColors());
             drawImage(drawer);
         });
     }
