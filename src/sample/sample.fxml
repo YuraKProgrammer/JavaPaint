@@ -1,32 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.CheckMenuItem?>
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <MenuBar>
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="Файл">
             <items>
               <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Brush">
+            <Menu mnemonicParsing="false" text="Фон">
+               <items>
+                  <Menu mnemonicParsing="false" text="Заполнить">
+                     <items>
+      				<MenuItem fx:id="_miFillBlack" mnemonicParsing="false" text="Чёрным" />
+      				<MenuItem fx:id="_miFillWhite" mnemonicParsing="false" text="Белым" />
+                        <MenuItem fx:id="_miFillGray" mnemonicParsing="false" text="Серым" />
+                        <MenuItem fx:id="_miFillRed" mnemonicParsing="false" text="Красным" />
+                        <MenuItem fx:id="_miFillGreen" mnemonicParsing="false" text="Зелёным" />
+                        <MenuItem fx:id="_miFillBlue" mnemonicParsing="false" text="Синим" />
+                        <MenuItem fx:id="_miFillYellow" mnemonicParsing="false" text="Жёлтым" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Рамка">
+                     <items>
+                        <MenuItem fx:id="_miBlackFrame" mnemonicParsing="false" text="Чёрная" />
+                     </items>
+                  </Menu>
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Ручное">
+               <items>
+                  <CheckMenuItem fx:id="_miSimpleManualDrawer" mnemonicParsing="false" text="Рисование квадратов" />
+                  <CheckMenuItem fx:id="_miSimpleManualDrawer2" mnemonicParsing="false" text="Рисование кругов" />
+                  <CheckMenuItem fx:id="_miManualRays" mnemonicParsing="false" text="Рисование линий" />
+                  <Menu mnemonicParsing="false" text="Размер">
+                     <items>
+                        <CheckMenuItem fx:id="_miSize5" mnemonicParsing="false" text="5" />
+                        <CheckMenuItem fx:id="_miSize10" mnemonicParsing="false" text="10" />
+                        <CheckMenuItem fx:id="_miSize30" mnemonicParsing="false" text="30" />
+                        <CheckMenuItem fx:id="_miSize50" mnemonicParsing="false" text="50" />
+                        <CheckMenuItem fx:id="_miSize100" mnemonicParsing="false" text="100" />
+                        <CheckMenuItem fx:id="_miSizeGrow" mnemonicParsing="false" text="Увеличение" />
+                        <CheckMenuItem fx:id="_miSizeDecrease" mnemonicParsing="false" text="Уменьшение" />
+                     </items>
+                  </Menu>
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Цвет">
                <items>
                   <CheckMenuItem fx:id="_miRandomColors" mnemonicParsing="false" text="Случайный цвет" />
                   <CheckMenuItem fx:id="_miSmallChangesRandom" mnemonicParsing="false" text="Небольшие случайные изменения " />
+                  <CheckMenuItem fx:id="_miBlackColor" mnemonicParsing="false" text="Чёрный" />
+                  <CheckMenuItem fx:id="_miWhiteColor" mnemonicParsing="false" text="Белый" />
+                  <CheckMenuItem fx:id="_miRedColor" mnemonicParsing="false" text="Красный" />
+                  <CheckMenuItem fx:id="_miGreenColor" mnemonicParsing="false" text="Зелёный" />
                </items>
             </Menu>
-          <Menu mnemonicParsing="false" text="Draw">
+          <Menu mnemonicParsing="false" text="Нарисовать">
             <items>
-				<MenuItem fx:id="_miFillBlack" mnemonicParsing="false" text="Заполнить чёрным" />
-				<MenuItem fx:id="_miFillWhite" mnemonicParsing="false" text="Заполнить белым" />
 				<MenuItem fx:id="_miRandRects" mnemonicParsing="false" text="Прямоугольники" />
+                  <MenuItem fx:id="_miRandCircs" mnemonicParsing="false" text="Круги" />
                   <MenuItem fx:id="_miRandLines" mnemonicParsing="false" text="Линии" />
                   <MenuItem fx:id="_miSin" mnemonicParsing="false" text="Синусоида" />
             </items>

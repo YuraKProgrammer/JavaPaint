@@ -11,7 +11,7 @@ public class Filler implements IDrawer{
         this.color = color;
     }
 
-    private Color color = Color.BLACK;
+    private Color color = Color.WHITE;
 
     public void draw(Graphics2D g, int width, int height) {
         g.setColor(color);
