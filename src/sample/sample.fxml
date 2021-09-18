@@ -32,15 +32,23 @@
                   <Menu mnemonicParsing="false" text="Рамка">
                      <items>
                         <MenuItem fx:id="_miBlackFrame" mnemonicParsing="false" text="Чёрная" />
+                        <MenuItem fx:id="_miWhiteFrame" mnemonicParsing="false" text="Белая" />
+                        <MenuItem fx:id="_miGrayFrame" mnemonicParsing="false" text="Серая" />
+                        <MenuItem fx:id="_miRedFrame" mnemonicParsing="false" text="Красная" />
+                        <MenuItem fx:id="_miGreenFrame" mnemonicParsing="false" text="Зелёная" />
+                        <MenuItem fx:id="_miBlueFrame" mnemonicParsing="false" text="Синяя" />
+                        <MenuItem fx:id="_miYellowFrame" mnemonicParsing="false" text="Жёлтая" />
                      </items>
                   </Menu>
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Ручное">
                <items>
-                  <CheckMenuItem fx:id="_miSimpleManualDrawer" mnemonicParsing="false" text="Рисование квадратов" />
-                  <CheckMenuItem fx:id="_miSimpleManualDrawer2" mnemonicParsing="false" text="Рисование кругов" />
-                  <CheckMenuItem fx:id="_miManualRays" mnemonicParsing="false" text="Рисование линий" />
+                  <CheckMenuItem fx:id="_miSimpleManualDrawer" mnemonicParsing="false" text="Квадратов" />
+                  <CheckMenuItem fx:id="_miSimpleManualDrawer2" mnemonicParsing="false" text="Кругов" />
+                  <CheckMenuItem fx:id="_miManualRays" mnemonicParsing="false" text="Линий" />
+                  <MenuItem fx:id="_miManualSymmetry" mnemonicParsing="false" text="Включить симметрию" />
+                  <MenuItem fx:id="_miManualSymmetryFalse" mnemonicParsing="false" text="***Отключить симметрию***" />
                   <Menu mnemonicParsing="false" text="Размер">
                      <items>
                         <CheckMenuItem fx:id="_miSize5" mnemonicParsing="false" text="5" />
@@ -56,12 +64,22 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Цвет">
                <items>
-                  <CheckMenuItem fx:id="_miRandomColors" mnemonicParsing="false" text="Случайный цвет" />
-                  <CheckMenuItem fx:id="_miSmallChangesRandom" mnemonicParsing="false" text="Небольшие случайные изменения " />
-                  <CheckMenuItem fx:id="_miBlackColor" mnemonicParsing="false" text="Чёрный" />
-                  <CheckMenuItem fx:id="_miWhiteColor" mnemonicParsing="false" text="Белый" />
-                  <CheckMenuItem fx:id="_miRedColor" mnemonicParsing="false" text="Красный" />
-                  <CheckMenuItem fx:id="_miGreenColor" mnemonicParsing="false" text="Зелёный" />
+                  <Menu mnemonicParsing="false" text="Случайный цвет">
+                     <items>
+                        <CheckMenuItem fx:id="_miRandomColors" mnemonicParsing="false" text="Случайный цвет" />
+                        <CheckMenuItem fx:id="_miSmallChangesRandom" mnemonicParsing="false" text="Небольшие случайные изменения " />
+                        <CheckMenuItem fx:id="_miAbruptRandomColors" mnemonicParsing="false" text="Резкие случайные изменения" />
+                        <CheckMenuItem fx:id="_miRandomGrayColors" mnemonicParsing="false" text="Случайный серый цвет" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Один цвет">
+                     <items>
+                        <CheckMenuItem fx:id="_miGreenColor" mnemonicParsing="false" text="Зелёный" />
+                        <CheckMenuItem fx:id="_miBlackColor" mnemonicParsing="false" text="Чёрный" />
+                        <CheckMenuItem fx:id="_miWhiteColor" mnemonicParsing="false" text="Белый" />
+                        <CheckMenuItem fx:id="_miRedColor" mnemonicParsing="false" text="Красный" />
+                     </items>
+                  </Menu>
                </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Нарисовать">
@@ -70,6 +88,9 @@
                   <MenuItem fx:id="_miRandCircs" mnemonicParsing="false" text="Круги" />
                   <MenuItem fx:id="_miRandLines" mnemonicParsing="false" text="Линии" />
                   <MenuItem fx:id="_miSin" mnemonicParsing="false" text="Синусоида" />
+                  <MenuItem fx:id="_miParab" mnemonicParsing="false" text="Парабола" />
+                  <MenuItem fx:id="_miHyper" mnemonicParsing="false" text="Гипербола" />
+                  <MenuItem fx:id="_miCircle" mnemonicParsing="false" text="***Окружность***" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

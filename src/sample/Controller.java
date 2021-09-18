@@ -4,16 +4,16 @@ import drawers.*;
 import drawers.Frame;
 import generators.*;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Controller {
     @FXML
@@ -41,9 +41,19 @@ public class Controller {
     @FXML
     private MenuItem _miSin;
     @FXML
+    private MenuItem _miParab;
+    @FXML
+    private MenuItem _miHyper;
+    @FXML
+    private MenuItem _miCircle;
+    @FXML
     private CheckMenuItem _miRandomColors;
     @FXML
     private CheckMenuItem _miSmallChangesRandom;
+    @FXML
+    private CheckMenuItem _miAbruptRandomColors;
+    @FXML
+    private CheckMenuItem _miRandomGrayColors;
     @FXML
     private CheckMenuItem _miBlackColor;
     @FXML
@@ -58,6 +68,10 @@ public class Controller {
     private CheckMenuItem _miSimpleManualDrawer2;
     @FXML
     private CheckMenuItem _miManualRays;
+    @FXML
+    private MenuItem _miManualSymmetry;
+    @FXML
+    private MenuItem _miManualSymmetryFalse;
     @FXML
     private CheckMenuItem _miSize5;
     @FXML
@@ -74,6 +88,18 @@ public class Controller {
     private CheckMenuItem _miSizeDecrease;
     @FXML
     private MenuItem _miBlackFrame;
+    @FXML
+    private MenuItem _miWhiteFrame;
+    @FXML
+    private MenuItem _miGrayFrame;
+    @FXML
+    private MenuItem _miRedFrame;
+    @FXML
+    private MenuItem _miGreenFrame;
+    @FXML
+    private MenuItem _miBlueFrame;
+    @FXML
+    private MenuItem _miYellowFrame;
 
     private BufferedImage _image;
 
@@ -84,6 +110,16 @@ public class Controller {
     private boolean sizeGrow = false;
 
     private boolean sizeDecrease = false;
+
+    private int md = 1;
+
+    private boolean symmetry = false;
+
+    private List<CheckMenuItem> colorGroup = new ArrayList<>();
+
+    private List<CheckMenuItem> manualDrawerGroup = new ArrayList<>();
+
+    private List<CheckMenuItem> sizeGroup = new ArrayList<>();
 
     private Color backgroundColor;
 
@@ -102,11 +138,38 @@ public class Controller {
 
     private Scene scene;
 
+    private void selectItem(List<CheckMenuItem> items, CheckMenuItem itemToSelect){
+        for (var m:items) {
+            m.setSelected(m==itemToSelect);
+        }
+    }
+
     public void setScene(Scene scene) {
         this.scene = scene;
         scene.widthProperty().addListener((obs, oldVal, newVal) -> resize());
         scene.heightProperty().addListener((obs, oldVal, newVal) -> resize());
         resize();
+
+        colorGroup.add(_miRandomColors);
+        colorGroup.add(_miSmallChangesRandom);
+        colorGroup.add(_miAbruptRandomColors);
+        colorGroup.add(_miRandomGrayColors);
+        colorGroup.add(_miBlackColor);
+        colorGroup.add(_miWhiteColor);
+        colorGroup.add(_miRedColor);
+        colorGroup.add(_miGreenColor);
+
+        manualDrawerGroup.add(_miManualRays);
+        manualDrawerGroup.add(_miSimpleManualDrawer);
+        manualDrawerGroup.add(_miSimpleManualDrawer2);
+
+        sizeGroup.add(_miSize5);
+        sizeGroup.add(_miSize10);
+        sizeGroup.add(_miSize30);
+        sizeGroup.add(_miSize50);
+        sizeGroup.add(_miSize100);
+        sizeGroup.add(_miSizeGrow);
+        sizeGroup.add(_miSizeDecrease);
 
         _miRandomColors.setSelected(true);
 
@@ -141,7 +204,26 @@ public class Controller {
                     size=300;
                 if (size<1)
                     size=1;
-                manualDrawer.draw(mouseMoveGraphics,(int)x,(int)y, (int)size);
+                if (md==2 && symmetry){
+                    var ManSym1 = new ManualSymmetry();
+                    ManSym1.setWidth(_image.getWidth());
+                    ManSym1.setHeight(_image.getHeight());
+                    manualDrawer=ManSym1;
+                }
+                if (md==1 && symmetry){
+                    var ManSym2 = new ManualSymmetry2();
+                    ManSym2.setWidth(_image.getWidth());
+                    ManSym2.setHeight(_image.getHeight());
+                    manualDrawer=ManSym2;
+                }
+                if (md==3 && symmetry){
+                    var ManSym3 = new ManualSymmetry3();
+                    ManSym3.setWidth(_image.getWidth());
+                    ManSym3.setHeight(_image.getHeight());
+                    manualDrawer=ManSym3;
+                }
+                if (manualDrawer!=_miManualRays)
+                    manualDrawer.draw(mouseMoveGraphics,(int)(x-size/2),(int)(y-size/2), (int)size);
                 _imageView.setImage(SwingFXUtils.toFXImage(_image, null));
             }
         });
@@ -192,57 +274,35 @@ public class Controller {
 
         _miRandomColors.setOnAction(actionEvent -> {
             colorGenerator=new RandomColors();
-            _miRandomColors.setSelected(true);
-            _miSmallChangesRandom.setSelected(false);
-            _miBlackColor.setSelected(false);
-            _miWhiteColor.setSelected(false);
-            _miRedColor.setSelected(false);
-            _miGreenColor.setSelected(false);
+            selectItem(colorGroup,_miRandomColors);
         });
         _miSmallChangesRandom.setOnAction(actionEvent -> {
             colorGenerator=new SmallChangesRandomColors();
-            _miSmallChangesRandom.setSelected(true);
-            _miRandomColors.setSelected(false);
-            _miBlackColor.setSelected(false);
-            _miWhiteColor.setSelected(false);
-            _miRedColor.setSelected(false);
-            _miGreenColor.setSelected(false);
+            selectItem(colorGroup,_miSmallChangesRandom);
+        });
+        _miAbruptRandomColors.setOnAction(actionEvent -> {
+            colorGenerator=new AbruptRandomColors();
+            selectItem(colorGroup,_miAbruptRandomColors);
+        });
+        _miRandomGrayColors.setOnAction(actionEvent -> {
+            colorGenerator=new RandomGrayColors();
+            selectItem(colorGroup,_miRandomGrayColors);
         });
         _miBlackColor.setOnAction(actionEvent -> {
             colorGenerator=new BlackColor();
-            _miSmallChangesRandom.setSelected(false);
-            _miRandomColors.setSelected(false);
-            _miBlackColor.setSelected(true);
-            _miWhiteColor.setSelected(false);
-            _miRedColor.setSelected(false);
-            _miGreenColor.setSelected(false);
+            selectItem(colorGroup,_miBlackColor);
         });
         _miWhiteColor.setOnAction(actionEvent -> {
             colorGenerator=new WhiteColor();
-            _miSmallChangesRandom.setSelected(false);
-            _miRandomColors.setSelected(false);
-            _miBlackColor.setSelected(false);
-            _miWhiteColor.setSelected(true);
-            _miRedColor.setSelected(false);
-            _miGreenColor.setSelected(false);
+            selectItem(colorGroup,_miWhiteColor);
         });
         _miRedColor.setOnAction(actionEvent -> {
             colorGenerator=new RedColor();
-            _miSmallChangesRandom.setSelected(false);
-            _miRandomColors.setSelected(false);
-            _miBlackColor.setSelected(false);
-            _miWhiteColor.setSelected(false);
-            _miRedColor.setSelected(true);
-            _miGreenColor.setSelected(false);
+            selectItem(colorGroup,_miRedColor);
         });
         _miGreenColor.setOnAction(actionEvent -> {
             colorGenerator=new GreenColor();
-            _miSmallChangesRandom.setSelected(false);
-            _miRandomColors.setSelected(false);
-            _miBlackColor.setSelected(false);
-            _miWhiteColor.setSelected(false);
-            _miRedColor.setSelected(false);
-            _miGreenColor.setSelected(true);
+            selectItem(colorGroup,_miGreenColor);
         });
         _miRandRects.setOnAction(actionEvent -> {
             var drawer = new RandomRectangels(colorGenerator);
@@ -260,111 +320,120 @@ public class Controller {
             var drawer = new Sinus(colorGenerator);
             drawImage(drawer);
         });
+        _miParab.setOnAction(actionEvent -> {
+            var drawer = new Parabola(colorGenerator);
+            drawImage(drawer);
+        });
+        _miHyper.setOnAction(actionEvent -> {
+            var drawer = new Hyperbola(colorGenerator);
+            drawImage(drawer);
+        });
+        _miCircle.setOnAction(actionEvent -> {
+            var drawer = new Circle(colorGenerator, manualDrawer);
+            drawImage(drawer);
+        });
         _miSimpleManualDrawer.setOnAction(actionEvent -> {
             manualDrawer=new SimpleManualDrawer();
-            _miSimpleManualDrawer.setSelected(true);
-            _miManualRays.setSelected(false);
-            _miSimpleManualDrawer2.setSelected(false);
+            md=1;
+            selectItem(manualDrawerGroup, _miSimpleManualDrawer);
         });
         _miSimpleManualDrawer2.setOnAction(actionEvent -> {
             manualDrawer=new SimpleManualDrawer2();
-            _miSimpleManualDrawer.setSelected(false);
-            _miManualRays.setSelected(false);
-            _miSimpleManualDrawer2.setSelected(true);
+            md=2;
+            selectItem(manualDrawerGroup, _miSimpleManualDrawer2);
         });
         _miManualRays.setOnAction(actionEvent -> {
             manualDrawer=new ManualRays();
-            _miSimpleManualDrawer.setSelected(false);
-            _miSimpleManualDrawer2.setSelected(false);
-            _miManualRays.setSelected(true);
+            md=3;
+            selectItem(manualDrawerGroup, _miManualRays);
+        });
+        _miManualSymmetry.setOnAction(actionEvent -> {
+                symmetry = true;
+        });
+        _miManualSymmetryFalse.setOnAction(actionEvent -> {
+            symmetry = false;
         });
         _miSize5.setOnAction(actionEvent -> {
             size=5;
             sizeGrow=false;
             sizeDecrease=false;
-            _miSize5.setSelected(true);
-            _miSize10.setSelected(false);
-            _miSize30.setSelected(false);
-            _miSize50.setSelected(false);
-            _miSize100.setSelected(false);
-            _miSizeGrow.setSelected(false);
-            _miSizeDecrease.setSelected(false);
+            selectItem(sizeGroup,_miSize5);
         });
         _miSize10.setOnAction(actionEvent -> {
             size=10;
             sizeGrow=false;
             sizeDecrease=false;
-            _miSize5.setSelected(false);
-            _miSize10.setSelected(true);
-            _miSize30.setSelected(false);
-            _miSize50.setSelected(false);
-            _miSize100.setSelected(false);
-            _miSizeGrow.setSelected(false);
-            _miSizeDecrease.setSelected(false);
+            selectItem(sizeGroup,_miSize10);
         });
         _miSize30.setOnAction(actionEvent -> {
             size=30;
             sizeGrow=false;
             sizeDecrease=false;
-            _miSize5.setSelected(false);
-            _miSize10.setSelected(false);
-            _miSize30.setSelected(true);
-            _miSize50.setSelected(false);
-            _miSize100.setSelected(false);
-            _miSizeGrow.setSelected(false);
-            _miSizeDecrease.setSelected(false);
+            selectItem(sizeGroup,_miSize30);
         });
         _miSize50.setOnAction(actionEvent -> {
             size=50;
             sizeGrow=false;
             sizeDecrease=false;
-            _miSize5.setSelected(false);
-            _miSize10.setSelected(false);
-            _miSize30.setSelected(false);
-            _miSize50.setSelected(true);
-            _miSize100.setSelected(false);
-            _miSizeGrow.setSelected(false);
-            _miSizeDecrease.setSelected(false);
+            selectItem(sizeGroup,_miSize50);
         });
         _miSize100.setOnAction(actionEvent -> {
             size=100;
             sizeGrow=false;
             sizeDecrease=false;
-            _miSize5.setSelected(false);
-            _miSize10.setSelected(false);
-            _miSize30.setSelected(false);
-            _miSize50.setSelected(false);
-            _miSize100.setSelected(true);
-            _miSizeGrow.setSelected(false);
-            _miSizeDecrease.setSelected(false);
+            selectItem(sizeGroup,_miSize100);
         });
         _miSizeGrow.setOnAction(actionEvent -> {
             size=1;
             sizeGrow=true;
             sizeDecrease=false;
-            _miSize5.setSelected(false);
-            _miSize10.setSelected(false);
-            _miSize30.setSelected(false);
-            _miSize50.setSelected(false);
-            _miSize100.setSelected(false);
-            _miSizeGrow.setSelected(true);
-            _miSizeDecrease.setSelected(false);
+            selectItem(sizeGroup,_miSizeGrow);
         });
         _miSizeDecrease.setOnAction(actionEvent -> {
             size=300;
             sizeDecrease=true;
             sizeGrow=false;
-            _miSize5.setSelected(false);
-            _miSize10.setSelected(false);
-            _miSize30.setSelected(false);
-            _miSize50.setSelected(false);
-            _miSize100.setSelected(false);
-            _miSizeGrow.setSelected(false);
-            _miSizeDecrease.setSelected(true);
+            selectItem(sizeGroup,_miSizeDecrease);
         });
         _miBlackFrame.setOnAction(actionEvent -> {
             var drawer = new Frame();
             drawer.setColor(Color.BLACK);
+            drawer.setColorIn(backgroundColor);
+            drawImage(drawer);
+        });
+        _miWhiteFrame.setOnAction(actionEvent -> {
+            var drawer = new Frame();
+            drawer.setColor(Color.WHITE);
+            drawer.setColorIn(backgroundColor);
+            drawImage(drawer);
+        });
+        _miGrayFrame.setOnAction(actionEvent -> {
+            var drawer = new Frame();
+            drawer.setColor(Color.GRAY);
+            drawer.setColorIn(backgroundColor);
+            drawImage(drawer);
+        });
+        _miRedFrame.setOnAction(actionEvent -> {
+            var drawer = new Frame();
+            drawer.setColor(Color.RED);
+            drawer.setColorIn(backgroundColor);
+            drawImage(drawer);
+        });
+        _miGreenFrame.setOnAction(actionEvent -> {
+            var drawer = new Frame();
+            drawer.setColor(Color.GREEN);
+            drawer.setColorIn(backgroundColor);
+            drawImage(drawer);
+        });
+        _miBlueFrame.setOnAction(actionEvent -> {
+            var drawer = new Frame();
+            drawer.setColor(Color.BLUE);
+            drawer.setColorIn(backgroundColor);
+            drawImage(drawer);
+        });
+        _miYellowFrame.setOnAction(actionEvent -> {
+            var drawer = new Frame();
+            drawer.setColor(Color.YELLOW);
             drawer.setColorIn(backgroundColor);
             drawImage(drawer);
         });

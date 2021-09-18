@@ -13,10 +13,6 @@ public class Frame implements IDrawer{
 
     private Color color = Color.WHITE;
 
-    public Color getColorIn() {
-        return colorIn;
-    }
-
     public void setColorIn(Color colorIn) {
         this.colorIn = colorIn;
     }
@@ -25,14 +21,10 @@ public class Frame implements IDrawer{
 
     private static final int nxy = 12;
 
-    private static final int indentw = -20;
-
-    private static final int indenth = -52;
-
     public void draw(Graphics2D g, int width, int height) {
         g.setColor(color);
         g.fillRect(0,0,width, height);
         g.setColor(colorIn);
-        g.fillRect(nxy,nxy,width+indentw,height+indenth);
+        g.fillRect(nxy,nxy,width-2*nxy,height-2*nxy);
     }
 }
