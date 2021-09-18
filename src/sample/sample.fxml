@@ -13,7 +13,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="Файл">
             <items>
-              <MenuItem fx:id="_miLoadImage" mnemonicParsing="false" text="Загрузить картинку" />
+              <MenuItem fx:id="_miLoadImage" mnemonicParsing="false" text="Открыть..." />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Фон">
@@ -21,7 +21,6 @@
                   <Menu mnemonicParsing="false" text="Заполнить">
                      <items>
       				<MenuItem fx:id="_miFillBlack" mnemonicParsing="false" text="Чёрным" />
-                         <MenuItem fx:id="_miInvert" mnemonicParsing="false" text="Инвертировать" />
       				<MenuItem fx:id="_miFillWhite" mnemonicParsing="false" text="Белым" />
                         <MenuItem fx:id="_miFillGray" mnemonicParsing="false" text="Серым" />
                         <MenuItem fx:id="_miFillRed" mnemonicParsing="false" text="Красным" />
@@ -30,6 +29,11 @@
                         <MenuItem fx:id="_miFillYellow" mnemonicParsing="false" text="Жёлтым" />
                      </items>
                   </Menu>
+                   <Menu mnemonicParsing="false" text="Растровая обработка">
+                       <items>
+                           <MenuItem fx:id="_miInvert" mnemonicParsing="false" text="Инвертировать цвета" />
+                       </items>
+                   </Menu>
                   <Menu mnemonicParsing="false" text="Рамка">
                      <items>
                         <MenuItem fx:id="_miBlackFrame" mnemonicParsing="false" text="Чёрная" />
