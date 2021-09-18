@@ -13,7 +13,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="Файл">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem fx:id="_miLoadImage" mnemonicParsing="false" text="Загрузить картинку" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Фон">
@@ -21,6 +21,7 @@
                   <Menu mnemonicParsing="false" text="Заполнить">
                      <items>
       				<MenuItem fx:id="_miFillBlack" mnemonicParsing="false" text="Чёрным" />
+                         <MenuItem fx:id="_miInvert" mnemonicParsing="false" text="Инвертировать" />
       				<MenuItem fx:id="_miFillWhite" mnemonicParsing="false" text="Белым" />
                         <MenuItem fx:id="_miFillGray" mnemonicParsing="false" text="Серым" />
                         <MenuItem fx:id="_miFillRed" mnemonicParsing="false" text="Красным" />
@@ -47,6 +48,7 @@
                   <CheckMenuItem fx:id="_miSimpleManualDrawer" mnemonicParsing="false" text="Квадратов" />
                   <CheckMenuItem fx:id="_miSimpleManualDrawer2" mnemonicParsing="false" text="Кругов" />
                   <CheckMenuItem fx:id="_miManualRays" mnemonicParsing="false" text="Линий" />
+                   <CheckMenuItem fx:id="_miSymmetryDrawer" mnemonicParsing="false" text="Сим" />
                   <MenuItem fx:id="_miManualSymmetry" mnemonicParsing="false" text="Включить симметрию" />
                   <MenuItem fx:id="_miManualSymmetryFalse" mnemonicParsing="false" text="***Отключить симметрию***" />
                   <Menu mnemonicParsing="false" text="Размер">

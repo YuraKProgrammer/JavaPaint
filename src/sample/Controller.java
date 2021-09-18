@@ -2,6 +2,7 @@ package sample;
 
 import drawers.*;
 import drawers.Frame;
+import drawers.bitmapOperations.InvertOperation;
 import generators.*;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
@@ -9,9 +10,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,6 +106,12 @@ public class Controller {
     private MenuItem _miBlueFrame;
     @FXML
     private MenuItem _miYellowFrame;
+    @FXML
+    private CheckMenuItem _miSymmetryDrawer;
+    @FXML
+    private MenuItem _miLoadImage;
+    @FXML
+    private MenuItem _miInvert;
 
     private BufferedImage _image;
 
@@ -136,6 +148,15 @@ public class Controller {
         return image;
     }
 
+    private static BufferedImage loadImage (String fileName) {
+        try {
+            return ImageIO.read(new File(fileName));
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
+
     private Scene scene;
 
     private void selectItem(List<CheckMenuItem> items, CheckMenuItem itemToSelect){
@@ -162,6 +183,7 @@ public class Controller {
         manualDrawerGroup.add(_miManualRays);
         manualDrawerGroup.add(_miSimpleManualDrawer);
         manualDrawerGroup.add(_miSimpleManualDrawer2);
+        manualDrawerGroup.add(_miSymmetryDrawer);
 
         sizeGroup.add(_miSize5);
         sizeGroup.add(_miSize10);
@@ -347,6 +369,10 @@ public class Controller {
             md=3;
             selectItem(manualDrawerGroup, _miManualRays);
         });
+        _miSymmetryDrawer.setOnAction(actionEvent -> {
+            manualDrawer=new SymmetryManualDrawer(new ManualRays(), _image.getWidth(), _image.getHeight());
+            selectItem(manualDrawerGroup, _miSymmetryDrawer);
+        });
         _miManualSymmetry.setOnAction(actionEvent -> {
                 symmetry = true;
         });
@@ -436,6 +462,17 @@ public class Controller {
             drawer.setColor(Color.YELLOW);
             drawer.setColorIn(backgroundColor);
             drawImage(drawer);
+        });
+        _miLoadImage.setOnAction(actionEvent -> {
+            _image = loadImage("C:\\Users\\Юра\\Downloads\\756106547063893.jpg");
+            _imageView.setImage(SwingFXUtils.toFXImage(_image, null));
+        });
+        _miInvert.setOnAction(actionEvent -> {
+            WritableImage wr = new WritableImage(_image.getWidth(),_image.getHeight());
+            PixelWriter pw = wr.getPixelWriter();
+            IBitmapOperation operation = new InvertOperation();
+            operation.process(_image,pw);
+        //    _image = (BufferedImage) (new ImageView(wr).getImage());
         });
     }
 
