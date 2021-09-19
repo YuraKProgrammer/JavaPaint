@@ -1,18 +1,25 @@
 package drawers.bitmapOperations;
 
-import drawers.IBitmapOperation;
-import javafx.scene.image.PixelWriter;
+import utils.IPixelImage;
 
-import java.awt.image.BufferedImage;
+import java.awt.*;
 
 public class InvertOperation implements IBitmapOperation {
     @Override
-    public void process(BufferedImage image, PixelWriter writer) {
-        for (var x=0; x<image.getWidth(); x++){
-            for (var y=0; y<image.getHeight(); y++){
-                var color = image.getRGB(x,y);
-                writer.setArgb(x,y,color/2);
+    public void process(IPixelImage pixelImage) {
+        for (var x=0; x<pixelImage.getWidth(); x++){
+            for (var y=0; y<pixelImage.getHeight(); y++){
+                var color = pixelImage.getPixel(x,y); // берём цвет исходного изображения
+                pixelImage.setPixel(x, y, getNewColor(color)); // сохраняем изменённый цвет
             }
         }
+    }
+
+    private Color getNewColor(Color c) {
+        return new Color( // переворачиваем цвета
+                255- c.getRed(),
+                255- c.getGreen(),
+                255- c.getBlue(),
+                c.getAlpha());
     }
 }

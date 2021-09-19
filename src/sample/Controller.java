@@ -2,26 +2,29 @@ package sample;
 
 import drawers.*;
 import drawers.Frame;
+import drawers.bitmapOperations.IBitmapOperation;
 import drawers.bitmapOperations.InvertOperation;
 import generators.*;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckMenuItem;
+import javafx.scene.control.Control;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.PixelWriter;
-import javafx.scene.image.WritableImage;
+import javafx.stage.FileChooser;
+import utils.PixelImage;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Controller {
+    @FXML
+    private javafx.scene.control.MenuBar menuBar;
     @FXML
     private ImageView _imageView;
     @FXML
@@ -464,20 +467,29 @@ public class Controller {
             drawImage(drawer);
         });
         _miLoadImage.setOnAction(actionEvent -> {
-            _image = loadImage("C:\\Users\\Юра\\Downloads\\756106547063893.jpg");
-            _imageView.setImage(SwingFXUtils.toFXImage(_image, null));
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Open image");
+            var file = fileChooser.showOpenDialog(this.scene.getWindow());
+            if (file != null) {
+                BufferedImage loadedImage = loadImage(file.getAbsolutePath());
+                if (loadedImage != null) {
+                    _image = loadedImage;
+                    _imageView.setImage(SwingFXUtils.toFXImage(_image, null));
+                }
+            }
         });
         _miInvert.setOnAction(actionEvent -> {
-            WritableImage wr = new WritableImage(_image.getWidth(),_image.getHeight());
-            PixelWriter pw = wr.getPixelWriter();
-            IBitmapOperation operation = new InvertOperation();
-            operation.process(_image,pw);
-        //    _image = (BufferedImage) (new ImageView(wr).getImage());
+            doBitmapOperation(new InvertOperation());
         });
     }
 
+    private void doBitmapOperation(IBitmapOperation operation) {
+        operation.process(new PixelImage(_image));
+        _imageView.setImage(SwingFXUtils.toFXImage(_image, null));
+    }
+
     private void resize() {
-        _image = createImage((int) scene.getWidth(), (int) scene.getHeight(), Color.black);
+        _image = createImage((int) scene.getWidth(), (int) (scene.getHeight() - menuBar.getHeight()), Color.black);
         _imageView.setImage(SwingFXUtils.toFXImage(_image, null));
     }
 
