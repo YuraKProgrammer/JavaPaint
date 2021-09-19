@@ -9,6 +9,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckMenuItem;
+import javafx.scene.control.Control;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -22,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Controller {
+    @FXML
+    private javafx.scene.control.MenuBar menuBar;
     @FXML
     private ImageView _imageView;
     @FXML
@@ -468,8 +471,11 @@ public class Controller {
             fileChooser.setTitle("Open image");
             var file = fileChooser.showOpenDialog(this.scene.getWindow());
             if (file != null) {
-                _image = loadImage(file.getAbsolutePath());
-                _imageView.setImage(SwingFXUtils.toFXImage(_image, null));
+                BufferedImage loadedImage = loadImage(file.getAbsolutePath());
+                if (loadedImage != null) {
+                    _image = loadedImage;
+                    _imageView.setImage(SwingFXUtils.toFXImage(_image, null));
+                }
             }
         });
         _miInvert.setOnAction(actionEvent -> {
@@ -483,7 +489,7 @@ public class Controller {
     }
 
     private void resize() {
-        _image = createImage((int) scene.getWidth(), (int) scene.getHeight(), Color.black);
+        _image = createImage((int) scene.getWidth(), (int) (scene.getHeight() - menuBar.getHeight()), Color.black);
         _imageView.setImage(SwingFXUtils.toFXImage(_image, null));
     }
 

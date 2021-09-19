@@ -17,21 +17,21 @@ public class SymmetryManualDrawer implements IManualDrawer{
 
     @Override
     public void draw(Graphics2D g, int x, int y, int size) {
-        drawer.draw(g,x,y,size);
-        drawer.draw(g,width-x,height-y,size);
-        drawer.draw(g,width-x,y,size);
-        drawer.draw(g,x,height-y,size);
-        /*
-        var centerX = width/2f;
-        var centerY = height/2f;
-        var radius = Math.min(centerX,centerY)*0.9f;
-        for(var i=0; i<n; i++){
-            var angle = 2*Math.PI*i/n;
-            var dx  = radius*Math.cos(angle);
-            var dy  = radius*Math.sin(angle);
-            drawer.draw(g,x+(int)(centerX+dx),y+(int)(centerY+dy),size);
+        var centerX = width / 2f;
+        var centerY = height / 2f;
 
+        // определяем угол и расстояние до (x, y), если смотреть из центра
+        var dx = x - centerX;
+        var dy = y - centerY;
+        var radius = Math.sqrt(dx*dx + dy*dy);
+        var angle = Math.atan2(dy, dx);
+
+        // поворачиваем точку N раз (вокруг центра)
+        for (int i = 0; i < n; i++) {
+            var a = angle + 2*Math.PI * i/n;
+            var copyX = centerX + radius * Math.cos(a);
+            var copyY = centerY + radius * Math.sin(a);
+            drawer.draw(g,(int)copyX,(int)copyY,size);
         }
-         */
     }
 }
