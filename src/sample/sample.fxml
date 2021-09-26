@@ -32,6 +32,11 @@
                    <Menu mnemonicParsing="false" text="Растровая обработка">
                        <items>
                            <MenuItem fx:id="_miInvert" mnemonicParsing="false" text="Инвертировать цвета" />
+                           <MenuItem fx:id="_miDimming" mnemonicParsing="false" text="Затемнить" />
+                           <MenuItem fx:id="_miHorMirror" mnemonicParsing="false" text="Зеркало горизонтально" />
+                           <MenuItem fx:id="_miVerMirror" mnemonicParsing="false" text="Зеркало вертикально" />
+                           <MenuItem fx:id="_miBlackWhite" mnemonicParsing="false" text="Чёрно-белое" />
+                           <MenuItem fx:id="_miNoise" mnemonicParsing="false" text="Шум" />
                        </items>
                    </Menu>
                   <Menu mnemonicParsing="false" text="Рамка">
@@ -54,7 +59,7 @@
                   <CheckMenuItem fx:id="_miManualRays" mnemonicParsing="false" text="Линий" />
                    <CheckMenuItem fx:id="_miSymmetryDrawer" mnemonicParsing="false" text="Сим" />
                   <MenuItem fx:id="_miManualSymmetry" mnemonicParsing="false" text="Включить симметрию" />
-                  <MenuItem fx:id="_miManualSymmetryFalse" mnemonicParsing="false" text="***Отключить симметрию***" />
+                  <MenuItem fx:id="_miManualSymmetryFalse" mnemonicParsing="false" text="Отключить симметрию" />
                   <Menu mnemonicParsing="false" text="Размер">
                      <items>
                         <CheckMenuItem fx:id="_miSize5" mnemonicParsing="false" text="5" />
@@ -96,7 +101,7 @@
                   <MenuItem fx:id="_miSin" mnemonicParsing="false" text="Синусоида" />
                   <MenuItem fx:id="_miParab" mnemonicParsing="false" text="Парабола" />
                   <MenuItem fx:id="_miHyper" mnemonicParsing="false" text="Гипербола" />
-                  <MenuItem fx:id="_miCircle" mnemonicParsing="false" text="***Окружность***" />
+                  <MenuItem fx:id="_miCircle" mnemonicParsing="false" text="Окружность" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

@@ -2,14 +2,12 @@ package sample;
 
 import drawers.*;
 import drawers.Frame;
-import drawers.bitmapOperations.IBitmapOperation;
-import drawers.bitmapOperations.InvertOperation;
+import drawers.bitmapOperations.*;
 import generators.*;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.Control;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -115,6 +113,16 @@ public class Controller {
     private MenuItem _miLoadImage;
     @FXML
     private MenuItem _miInvert;
+    @FXML
+    private MenuItem _miDimming;
+    @FXML
+    private MenuItem _miHorMirror;
+    @FXML
+    private MenuItem _miVerMirror;
+    @FXML
+    private MenuItem _miBlackWhite;
+    @FXML
+    private MenuItem _miNoise;
 
     private BufferedImage _image;
 
@@ -480,6 +488,21 @@ public class Controller {
         });
         _miInvert.setOnAction(actionEvent -> {
             doBitmapOperation(new InvertOperation());
+        });
+        _miDimming.setOnAction(actionEvent -> {
+            doBitmapOperation(new DimmingOperation());
+        });
+        _miHorMirror.setOnAction(actionEvent -> {
+            doBitmapOperation(new HorMirrorOperation());
+        });
+        _miVerMirror.setOnAction(actionEvent -> {
+            doBitmapOperation(new VerMirrorOperation());
+        });
+        _miBlackWhite.setOnAction(actionEvent -> {
+            doBitmapOperation(new BlackWhiteOperation());
+        });
+        _miNoise.setOnAction(actionEvent -> {
+            doBitmapOperation(new NoiseOperation());
         });
     }
 
