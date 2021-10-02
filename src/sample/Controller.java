@@ -13,10 +13,13 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import utils.PixelImage;
 
+import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +56,8 @@ public class Controller {
     private MenuItem _miHyper;
     @FXML
     private MenuItem _miCircle;
+    @FXML
+    private MenuItem _miRunningPoint;
     @FXML
     private CheckMenuItem _miRandomColors;
     @FXML
@@ -112,6 +117,10 @@ public class Controller {
     @FXML
     private MenuItem _miLoadImage;
     @FXML
+    private MenuItem _miSaveImage;
+    @FXML
+    private MenuItem _miCopyImage;
+    @FXML
     private MenuItem _miInvert;
     @FXML
     private MenuItem _miDimming;
@@ -123,6 +132,8 @@ public class Controller {
     private MenuItem _miBlackWhite;
     @FXML
     private MenuItem _miNoise;
+    @FXML
+    private MenuItem _miBlackFr;
 
     private BufferedImage _image;
 
@@ -365,6 +376,10 @@ public class Controller {
             var drawer = new Circle(colorGenerator, manualDrawer);
             drawImage(drawer);
         });
+        _miRunningPoint.setOnAction(actionEvent -> {
+            var drawer = new RunningPoint(colorGenerator);
+            drawImage(drawer);
+        });
         _miSimpleManualDrawer.setOnAction(actionEvent -> {
             manualDrawer=new SimpleManualDrawer();
             md=1;
@@ -486,6 +501,38 @@ public class Controller {
                 }
             }
         });
+        _miSaveImage.setOnAction(actionEvent -> {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save image");
+            var jpgFilter = new FileChooser.ExtensionFilter("jpg-files", "*.jpg");
+            var pngFilter = new FileChooser.ExtensionFilter("png-files", "*.png");
+            fileChooser.getExtensionFilters().add(pngFilter);
+            fileChooser.getExtensionFilters().add(jpgFilter);
+            var file = fileChooser.showSaveDialog(this.scene.getWindow());
+            if (file != null) {
+                try {
+                    ImageIO.write(_image, "png", file);
+                }
+                catch (IOException e){
+                    Main.showError(e);
+                }
+            }
+        });
+        _miCopyImage.setOnAction(actionEvent -> {
+            /*
+            TransferableImage trans = new TransferableImage(_image);
+            Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
+            c.setContents(_image, this );
+            if (file != null) {
+                try {
+                    ImageIO.write(_image, "png", file);
+                }
+                catch (IOException e){
+                    Main.showError(e);
+                }
+            }
+             */
+        });
         _miInvert.setOnAction(actionEvent -> {
             doBitmapOperation(new InvertOperation());
         });
@@ -503,6 +550,9 @@ public class Controller {
         });
         _miNoise.setOnAction(actionEvent -> {
             doBitmapOperation(new NoiseOperation());
+        });
+        _miBlackFr.setOnAction(actionEvent -> {
+            doBitmapOperation(new BlackFrame());
         });
     }
 

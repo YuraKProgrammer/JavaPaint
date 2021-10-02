@@ -14,6 +14,8 @@
           <Menu mnemonicParsing="false" text="Файл">
             <items>
               <MenuItem fx:id="_miLoadImage" mnemonicParsing="false" text="Открыть..." />
+              <MenuItem fx:id="_miSaveImage" mnemonicParsing="false" text="Сохранить..." />
+              <MenuItem fx:id="_miCopyImage" mnemonicParsing="false" text="Скопировать" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Фон">
@@ -37,6 +39,7 @@
                            <MenuItem fx:id="_miVerMirror" mnemonicParsing="false" text="Зеркало вертикально" />
                            <MenuItem fx:id="_miBlackWhite" mnemonicParsing="false" text="Чёрно-белое" />
                            <MenuItem fx:id="_miNoise" mnemonicParsing="false" text="Шум" />
+                           <MenuItem fx:id="_miBlackFr" mnemonicParsing="false" text="***Чёрная рамка***" />
                        </items>
                    </Menu>
                   <Menu mnemonicParsing="false" text="Рамка">
@@ -102,6 +105,7 @@
                   <MenuItem fx:id="_miParab" mnemonicParsing="false" text="Парабола" />
                   <MenuItem fx:id="_miHyper" mnemonicParsing="false" text="Гипербола" />
                   <MenuItem fx:id="_miCircle" mnemonicParsing="false" text="Окружность" />
+                  <MenuItem fx:id="_miRunningPoint" mnemonicParsing="false" text="Бегающая точка" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
